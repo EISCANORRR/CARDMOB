@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
 
-
 class List extends Component {
     state = {
         names: [
@@ -21,6 +20,13 @@ class List extends Component {
                 <Text style={styles.text}>
                     Lista de itens "clicáveis"
                 </Text>
+                {
+                    this.state.names.map((item, index) => (
+                        <TouchableOpacity key={item.id} style={styles.container}onPress={() => this.alertItemName(item)}>
+                            <Text style={styles.text}>{item.name}</Text>
+                        </TouchableOpacity>
+                    ))
+                }
             </View>
         );
     }
