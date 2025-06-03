@@ -1,12 +1,9 @@
 {
-  "items": [
+  "compras": [
     {
-      "id": "0255",
-      "text": "Novo Item"
-    },
-    {
-      "id": "bc28",
-      "text": "Novo Item"
+      "id": "ccdc",
+      "name": "Pao",
+      "quant": "3"
     }
   ]
 }
