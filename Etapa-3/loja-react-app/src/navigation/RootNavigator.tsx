@@ -6,6 +6,9 @@ import { RootStackParamList, TabParamList } from './types';
 
 // Telas do app.
 import HomeScreen from "../screens/HomeScreen";
+import LoginScreen from "../screens/LoginScreen";
+import RegisterScreen from "../screens/RegisterScreen"
+
 // Importar depois que implementar: DetailsScreen, SettingsScreens
 
 const AppStack = createNativeStackNavigator<RootStackParamList>();
@@ -16,6 +19,7 @@ function TabNavigator() {
     <Tab.Navigator>
       <Tab.Screen name="Home" component={HomeScreen}></Tab.Screen>
       <Tab.Screen name="Settings" component={HomeScreen}></Tab.Screen>
+      <Tab.Screen name="Register" component={RegisterScreen}></Tab.Screen>
     </Tab.Navigator>
   );
 }
@@ -25,6 +29,7 @@ function AppNavigator() {
     <AppStack.Navigator>
       <AppStack.Screen name="Tabs" component={TabNavigator} options={{headerShown: false}}/>
       <AppStack.Screen name="Details" component={HomeScreen} options={{ title: 'Detalhes'}}/>
+      <AppStack.Screen name="Login" component={LoginScreen} options={{ title: 'Acessar'}}/>
     </AppStack.Navigator>
   );
 }
