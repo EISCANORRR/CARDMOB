@@ -1,60 +1,36 @@
-import React, { useContext } from "react";
-import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
+import React from 'react';
+import { View, Text, FlatList, StyleSheet } from 'react-native';
 
+import CartItem from './CartItem';
 
-const CartItem = ({ item }: any) => {
-    // @todo implementar o context para persistir dados do carrinho.
+import { useShop } from '../../contexts/ShopContext';
 
-    const handleRemove = () => {
-        console.log('exclui produto');
-    }
+const CartScreen = ({ navigation }: any) => {
+    const { cartItems } = useShop();
 
-    return (
-        <View style={styles.container}>
-            <Image source={{ uri: item.image }} style={styles.image} />
-            <View>
-                <Text style={styles.name}>{item.name}</Text>
-                <View style={styles.quantity}>
-                    <Text style={styles.price}>R$ {(item.price * item.quantity).toFixed(2)}</Text>
-                    <TouchableOpacity onPress={() => handleRemove()} style={styles.button}>
-                        <Text style={styles.buttonText}>-</Text>
-                    </TouchableOpacity>
-                    <Text style={styles.quantityValue}>{item.quantity}</Text>
-
-                    <TouchableOpacity onPress={() => handleRemove()} style={styles.button}>
-                        <Text style={styles.buttonText}>+</Text>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity onPress={() => handleRemove()} style={styles.button}>
-                        <Text style={styles.buttonText}>Remover</Text>
-                    </TouchableOpacity>
-                </View>
-            </View>
-        </View>
+    const renderItem = ({item} : any) => (
+        <CartItem item={item} />
     );
 
-}
-export default CartItem;
+    const cartTemp = [
+        { 
+            id: 1,
+            quantity: 2,
+            price: 8.5,
+            name: "Brigadeiro promoção especial",
+            image: "http://10.81.205.50:5000/uploads/brigadeiro-matcha-white.png",
+        }
+    ];
 
-const styles = StyleSheet.create({
-    container: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        padding: 10,
-        borderBottomWidth: 1,
-        borderColor: '#ddd',
-    },
-    image: {
-        width: '50%',
-        height: 100,
-        borderRadius: 8,
-        borderColor: '#ddd',
-    },
-    name: {},
-    quantity: {},
-    price: {},
-    button: {},
-    buttonText: {},
-    quantityValue: {},
-
-});
+    return (
+        <View> 
+            <Text>Carrinho de compras</Text>
+            <FlatList 
+                data={cartItems}
+                renderItem={renderItem}
+                keyExtractor={(item: any) => item.id.toString()}
+            />
+        </View>
+    );
+};
+export default CartScreen;
