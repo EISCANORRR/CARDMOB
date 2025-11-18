@@ -55,3 +55,18 @@ export async function requestRegister(name: string, email: string, password: str
         // return Promise.reject('Credenciais inválidas');
     }
 }
+
+export async function getTokenData(token: string | null): Promise<any[]> {
+    try {
+        if (!token) {
+            return [];
+        }
+        const base64Url = token.split('.')[1];
+        const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+        const payload = JSON.parse(atob(base64));
+        return payload;
+    } catch (error) {
+        console.error(error);
+        return Promise.reject('Token inválido.');
+    }
+}
